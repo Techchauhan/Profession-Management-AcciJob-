@@ -3,8 +3,17 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import UserTable from "@/components/Table";
 
+interface userData {
+  key: string;
+  username: string;
+  age: number | string;
+  profession: string;
+
+}
+
+
 export default function Home() {
-  const [existingUsers, setExistingUsers] = useState<any[]>([]);
+  const [existingUsers, setExistingUsers] = useState<userData[]>([]);
 
   // Load existing users from localStorage on component mount
   useEffect(() => {
@@ -13,7 +22,7 @@ export default function Home() {
   }, []);
 
   // Handle form submission
-  const handleSubmit = (formData: { username: string; age: number | string; profession: string }) => {
+  const handleSubmit = (formData: Omit<userData, "key" >) => {
     console.log("Form Submitted:", formData);
 
     // Update localStorage and state
